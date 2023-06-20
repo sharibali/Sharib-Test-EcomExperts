@@ -223,14 +223,14 @@
                         {{ 'products.product.quantity.label' | t }}
                       </label>
                       <quantity-input class="quantity cart-quantity">
-                        <button class="quantity__button no-js-hidden" name="minus" type="button">
+                        <button class="quantity__button no-js-hidden" name="minus" type="button"  {%if item.variant.id == 45285479678246%} style="display:none"{%endif%}>
                           <span class="visually-hidden">
                             {{- 'products.product.quantity.decrease' | t: product: item.product.title | escape -}}
                           </span>
                           {% render 'icon-minus' %}
                         </button>
                         <input
-                          class="quantity__input"
+                          class="quantity__input" readonly
                           data-quantity-variant-id="{{ item.variant.id }}"
                           type="number"
                           name="updates[]"
@@ -247,7 +247,7 @@
                           id="Quantity-{{ item.index | plus: 1 }}"
                           data-index="{{ item.index | plus: 1 }}"
                         >
-                        <button class="quantity__button no-js-hidden" name="plus" type="button">
+                        <button class="quantity__button no-js-hidden" name="plus" type="button"  {%if item.variant.id == 45285479678246%} style="display:none"{%endif%}>
                           <span class="visually-hidden">
                             {{- 'products.product.quantity.increase' | t: product: item.product.title | escape -}}
                           </span>
@@ -255,7 +255,7 @@
                         </button>
                       </quantity-input>
 
-                      <cart-remove-button
+                      <cart-remove-button data-removeid="remove-{{item.variant.id}}" data-variantid="{{item.variant.id}}"  {% if item.variant.id == 45285479678246%} style="display:none"{%endif%}
                         id="Remove-{{ item.index | plus: 1 }}"
                         data-index="{{ item.index | plus: 1 }}"
                       >

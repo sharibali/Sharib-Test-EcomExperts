@@ -6,6 +6,13 @@ class CartRemoveButton extends HTMLElement {
       event.preventDefault();
       const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
       cartItems.updateQuantity(this.dataset.index, 0);
+      if(this.dataset.variantid == 45288587395366){
+       
+       setTimeout(()=>{
+        document.querySelector('[data-removeid="remove-45285479678246"]').click();
+      },1000)
+        
+      }
     });
   }
 }

@@ -179,6 +179,24 @@ class QuantityInput extends HTMLElement {
 
   onInputChange(event) {
     this.validateQtyRules();
+    var updateproduct = document.querySelector('[data-quantity-variant-id="45288587395366"]')
+    if(updateproduct){
+      
+      var update_quantity = updateproduct.value;
+      var newdata ={ updates:{
+        45285479678246 : update_quantity
+      }}
+      fetch('/cart/update.js',{
+        method:"POST",
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify(newdata)
+      }).then((res)=>{
+        console.log(res)
+      })
+      .catch((err)=>{console.log(err)})
+    }
   }
 
   onButtonClick(event) {

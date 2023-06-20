@@ -1,0 +1,22 @@
+.hide_select_dawn{
+    display: none;
+}
+
+.color_swatch_label{
+    border-radius:50%;
+    width:50px !important;
+    height:50px !important;
+    display: block !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.color_option_wrap{
+    display: flex;
+    padding: 5px;
+}
+
+.color_swatch:checked+.color_swatch_label{
+    border: 2px solid black;
+}
