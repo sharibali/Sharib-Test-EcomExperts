@@ -82,6 +82,22 @@ if (!customElements.get('product-form')) {
             } else {
               this.cart.renderContents(response);
             }
+            if(response.variant_id == 45288587395366){
+                var newdata ={ updates:{
+                  45285479678246 : response.quantity
+                }}
+
+                fetch('/cart/update.js',{
+                  method:"POST",
+                  headers:{
+                    'Content-Type':'application/json'
+                  },
+                  body:JSON.stringify(newdata)
+                }).then((res)=>{
+                  console.log(res)
+                })
+                .catch((err)=>{console.log(err)})
+            }
           })
           .catch((e) => {
             console.error(e);

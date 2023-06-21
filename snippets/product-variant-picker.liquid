@@ -34,7 +34,7 @@
   {%- else -%}
     <variant-selects
       id="variant-selects-{{ section.id }}"
-      class="no-js-hidden"
+      class="no-js-hidden select_variant"
       data-section="{{ section.id }}"
       data-url="{{ product.url }}"
       {% if update_url == false %}
@@ -43,14 +43,15 @@
       {{ block.shopify_attributes }}
     >
       {%- for option in product.options_with_values -%}
-        <div class="product-form__input product-form__input--dropdown">
+        {%assign option_name = option.name | downcase%}
+        <div class="product-form__input product-form__input--dropdown {%if option_name == 'color'%}hide_select_dawn{%endif%}">
           <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
             {{ option.name }}
           </label>
           <div class="select">
             <select
               id="Option-{{ section.id }}-{{ forloop.index0 }}"
-              class="select__select"
+              class="select__select option-{{option.name | downcase}}"
               name="options[{{ option.name | escape }}]"
               form="{{ product_form_id }}"
             >
@@ -58,6 +59,20 @@
             </select>
             {% render 'icon-caret' %}
           </div>
+        </div>
+        <div class="color_option_wrap">
+        {%if option_name == 'color'%}
+          {%assign color_image = ''%}
+          {%for value in option.values%}
+            {%for variant in product.variants%}
+              {%if variant.title contains value%}
+                {%assign color_image = variant.image |  img_url: 'small'%}
+              {%endif%}
+            {%endfor%}
+            <input type="checkbox" {%if forloop.index == 1%} checked="true" {%endif%} id="color-{{value}}-{{product.id}}" class="color_swatch" data-colorvalue="{{value}}" style="display:none">
+            <label for="color-{{value}}-{{product.id}}" class="color_swatch_label" style="background-image:url('{{color_image}}')"><span style="opacity:0">{{value}}</span></label>
+          {%endfor%}
+        {%endif%}
         </div>
       {%- endfor -%}
 

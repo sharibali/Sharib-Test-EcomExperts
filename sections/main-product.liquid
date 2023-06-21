@@ -568,7 +568,42 @@
     }
   </script>
 </section>
-
+<script>
+  var color_swatch = document.querySelectorAll('.color_swatch');
+  color_swatch.forEach(function(swatch){
+    swatch.addEventListener('change',function(){
+      var color_value = this.dataset.colorvalue;
+      color_swatch.forEach(function(compare_swatch){
+        if(compare_swatch.dataset.colorvalue == color_value){
+          compare_swatch.checked = true
+        }else{
+          compare_swatch.checked = false
+        }
+      })
+      this.closest('.select_variant').querySelector('.option-color').value = color_value
+    })
+  })
+</script>
+{%if product.id == 8374890594598%}
+<script>
+  document.querySelector('.option-size').value = 'Unselected'
+  document.querySelector('.product-form__submit').setAttribute('disabled','');
+ 
+  document.querySelector('.option-size').addEventListener('change',function(){
+    if(this.value != 'Unselected' ){
+      document.querySelector('.product-form__submit').removeAttribute('disabled')
+    }else{
+      setTimeout(()=>{
+        document.querySelector('.product-form__submit').setAttribute('disabled','');
+      },1000)
+      
+    }
+  })
+  let stateObj = { id: "100" };
+            window.history.replaceState(stateObj,
+                        "Page", "{{product.url}}")
+</script>
+{%endif%}
 {% schema %}
 {
   "name": "t:sections.main-product.name",
